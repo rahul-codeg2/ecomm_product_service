@@ -17,7 +17,7 @@ public class ProductController
     private ProductService productService;
 
     @GetMapping("/home/get-all-products")
-    public List<Product> getAllProducts()
+    public ResponseEntity<List<Product> >getAllProducts()
     {
         return productService.getAllProducts();
 

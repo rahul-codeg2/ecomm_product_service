@@ -17,11 +17,11 @@ public class ProductService
 {
     @Autowired
     private ProductRepository productRepository;
-    public List<Product> getAllProducts()
+    public ResponseEntity<List<Product>> getAllProducts()
     {
         List<Product> list=productRepository.findAllProducts();
-        return list;
-       // return new ResponseEntity<>(list, HttpStatus.OK);
+
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     public ResponseEntity<List<ProductStockResponse>> getProductsById(List<Integer> product_ids)
