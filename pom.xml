@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ecomm_product_service</groupId>
 	<artifactId>ecomm-product-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<!--<version>0.0.1-SNAPSHOT</version>-->
 	<name>ecomm-product-service</name>
 	<description>This  contains product related services</description>
 	<properties>
