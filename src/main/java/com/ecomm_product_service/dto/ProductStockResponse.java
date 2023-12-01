@@ -1,4 +1,4 @@
-package com.ecomm_product_service.model;
+package com.ecomm_product_service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

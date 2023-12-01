@@ -1,12 +1,15 @@
 package com.ecomm_product_service.service;
 
+import com.ecomm_product_service.dto.UserResponse;
 import com.ecomm_product_service.model.Product;
-import com.ecomm_product_service.model.ProductStockResponse;
+import com.ecomm_product_service.dto.ProductStockResponse;
 import com.ecomm_product_service.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +20,12 @@ public class ProductService
 {
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private WebClient webClient;
+
+
+
     public ResponseEntity<List<Product>> getAllProducts()
     {
         List<Product> list=productRepository.findAllProducts();
@@ -59,5 +68,25 @@ public class ProductService
             e.printStackTrace();
         }
 
+    }
+
+    public UserResponse authenticate(String token)
+    {
+        String userServiceUrl = "http://localhost:9000/validate-token";
+
+        UserResponse userResponse=webClient.post().uri(userServiceUrl)
+            .header("Authorization", token)
+            .retrieve()
+            .bodyToMono(UserResponse.class).block();
+
+
+        if(userResponse!=null )
+        {
+            return userResponse;
+        }
+        else
+        {
+            throw new RuntimeException("Invalid JWT token");
+        }
     }
 }
