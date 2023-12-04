@@ -18,8 +18,7 @@ public class ProductController
     @GetMapping("/products")
     public ResponseEntity<List<Product> >getAllProducts(@RequestHeader("Authorization") String token)
     {
-        productService.authenticate(token);
-        return productService.getAllProducts();
+        return productService.getAllProducts(token);
 
     }
     @PostMapping("/check-stock")
